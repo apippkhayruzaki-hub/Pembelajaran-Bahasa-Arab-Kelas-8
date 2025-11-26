@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplikasi Pembelajaran</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .btn-hover {
+            transition: all 0.3s ease;
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+ </head>
+ <body class="h-full bg-gradient-to-br from-blue-50 to-indigo-100 font-sans">
+  <div id="app" class="h-full min-h-screen flex flex-col items-center p-4">
+   <div id="loading" class="h-full w-full flex items-center justify-center">
+    <div class="text-center">
+     <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+     <p class="mt-4 text-gray-600">Memuat...</p>
+    </div>
+   </div>
+   <div id="main-content" class="w-full max-w-2xl bg-white shadow-xl rounded-2xl p-4 sm:p-6 hidden flex-grow flex-col">
+    <header class="flex justify-between items-center pb-4 border-b">
+     <button id="back-btn" class="text-gray-600 hover:text-blue-600 hidden">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+     </button>
+     <h1 id="page-title" class="text-xl sm:text-2xl font-bold text-gray-800 flex-grow text-center">Aplikasi Pembelajaran Bahasa Arab Untuk Kelas 8</h1>
+     <div class="w-6 h-6"></div>
+    </header>
+    <main class="flex-grow pt-6 overflow-y-auto">
+     <div id="home-page" class="fade-in">
+      <div class="text-center py-12">
+       <h2 class="text-4xl font-extrabold text-blue-800">Selamat Datang</h2>
+       <p class="mt-3 text-lg text-gray-600">Mari mulai perjalanan belajar Bahasa Arab Anda.</p>
+       <div class="mt-10 space-y-4">
+        <button id="start-learning" class="w-full max-w-sm mx-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 btn-hover">
+         Mulai Belajar
+        </button>
+        <button id="exit-app" class="w-full max-w-sm mx-auto flex items-center justify-center px-8 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 btn-hover">
+         Keluar
+        </button>
+       </div>
+       <div class="mt-12 pt-6 border-t border-gray-200">
+        <h3 class="text-xl font-bold text-gray-700 mb-4">Pengembang Aplikasi</h3>
+        <ul class="text-gray-600 space-y-2 max-w-xs mx-auto">
+         <li class="p-2 bg-gray-50 rounded-md shadow-sm border border-gray-100">Rafi Afif Khayruzaki</li>
+         <li class="p-2 bg-gray-50 rounded-md shadow-sm border border-gray-100">Mey Muyassarah</li>
+         <li class="p-2 bg-gray-50 rounded-md shadow-sm border border-gray-100">Rizqi Maulida</li>
+        </ul>
+       </div>
+       </div>
+     </div>
+     <div id="dashboard-page" class="hidden fade-in">
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">Daftar Pembelajaran</h2>
+      <div class="space-y-6">
+       <h3 class="text-xl font-semibold text-blue-600 border-b pb-2">Bab Pembelajaran</h3>
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <button data-chapter="1" class="chapter-btn btn-hover bg-blue-50 p-4 rounded-lg text-blue-700 font-semibold text-left shadow-md hover:shadow-lg">
+         Bab 1
+		 القرأن الكريم
+        </button>
+        <button data-chapter="2" class="chapter-btn btn-hover bg-blue-50 p-4 rounded-lg text-blue-700 font-semibold text-left shadow-md hover:shadow-lg">
+         Bab 2
+		 جسم الإنسان
+        </button>
+        <button data-chapter="3" class="chapter-btn btn-hover bg-blue-50 p-4 rounded-lg text-blue-700 font-semibold text-left shadow-md hover:shadow-lg">
+         Bab 3
+		 الأعمال اليومية
+        </button>
+        <button data-chapter="4" class="chapter-btn btn-hover bg-blue-50 p-4 rounded-lg text-blue-700 font-semibold text-left shadow-md hover:shadow-lg">
+         Bab 4
+		 التحية والسلام
+        </button>
+        <button data-chapter="5" class="chapter-btn btn-hover bg-blue-50 p-4 rounded-lg text-blue-700 font-semibold text-left shadow-md hover:shadow-lg">
+         Bab 5
+		 لعب كرة القدم
+        </button>
+        <button data-chapter="6" class="chapter-btn btn-hover bg-blue-50 p-4 rounded-lg text-blue-700 font-semibold text-left shadow-md hover:shadow-lg">
+         Bab 6
+		 المصاحبة
+        </button>
+       </div>
+       <h3 class="text-xl font-semibold text-red-600 border-b pb-2 pt-4">Evaluasi</h3>
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <button data-evaluation="1" class="evaluation-btn btn-hover bg-red-50 p-4 rounded-lg text-red-700 font-semibold text-left shadow-md hover:shadow-lg">
+         Evaluasi 1
+        </button>
+        <button data-evaluation="2" class="evaluation-btn btn-hover bg-red-50 p-4 rounded-lg text-red-700 font-semibold text-left shadow-md hover:shadow-lg">
+         Evaluasi 2
+        </button>
+       </div>
+      </div>
+     </div>
+     <div id="chapter-page" class="hidden fade-in">
+      <h2 id="chapter-title" class="text-2xl sm:text-3xl font-bold text-gray-800 mb-8 text-center">Bab X</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+       <button id="video-hiwar-btn" class="btn-hover bg-white p-4 rounded-xl text-center shadow-lg hover:shadow-xl hover:scale-[1.02] transform transition">
+        <span class="text-3xl">🗣️</span>
+        <p class="mt-2 font-semibold text-gray-700">Video Hiwar</p>
+       </button>
+       <button id="video-materi-btn" class="btn-hover bg-white p-4 rounded-xl text-center shadow-lg hover:shadow-xl hover:scale-[1.02] transform transition">
+        <span class="text-3xl">📺</span>
+        <p class="mt-2 font-semibold text-gray-700">Video Materi</p>
+       </button>
+       <button id="kosa-kata-btn" class="btn-hover bg-white p-4 rounded-xl text-center shadow-lg hover:shadow-xl hover:scale-[1.02] transform transition">
+        <span class="text-3xl">📚</span>
+        <p class="mt-2 font-semibold text-gray-700">Kosa Kata</p>
+       </button>
+       <button id="kaidah-btn" class="btn-hover bg-white p-4 rounded-xl text-center shadow-lg hover:shadow-xl hover:scale-[1.02] transform transition">
+        <span class="text-3xl">📖</span>
+        <p class="mt-2 font-semibold text-gray-700">Kaidah</p>
+       </button>
+       <button id="latihan-soal-btn" class="btn-hover bg-white p-4 rounded-xl text-center shadow-lg hover:shadow-xl hover:scale-[1.02] transform transition md:col-span-2">
+        <span class="text-3xl">📝</span>
+        <p class="mt-2 font-semibold text-gray-700">Latihan Soal</p>
+       </button>
+      </div>
+     </div>
+     <div id="evaluation-page" class="hidden fade-in">
+      <h2 id="evaluation-title" class="text-2xl sm:text-3xl font-bold text-gray-800 mb-8 text-center">Evaluasi X</h2>
+      <div class="space-y-4 max-w-sm mx-auto">
+       <div id="evaluation-url" class="space-y-2">
+        <label for="eval-url-input" class="block text-sm font-medium text-gray-700">Tautan Google Form:</label>
+        <input type="url" id="eval-url-input" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="Masukkan tautan Google Form di sini...">
+       </div>
+       <button id="save-evaluation-url" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+        Simpan Tautan
+       </button>
+       <button id="open-evaluation" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:bg-red-300 btn-hover">
+        Buka Evaluasi
+       </button>
+      </div>
+     </div>
+     <div id="content-page" class="hidden fade-in">
+      <h2 id="content-title" class="text-xl sm:text-2xl font-bold text-gray-800 mb-6 text-center">Konten</h2>
+      <div id="video-content" class="hidden space-y-6">
+       <div id="video-url-input" class="space-y-2 hidden">
+        <label for="vid-url-input" class="block text-sm font-medium text-gray-700">Tautan Video YouTube:</label>
+        <input type="url" id="vid-url-input" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="Masukkan tautan YouTube di sini...">
+       </div>
+       <button id="save-video-url" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 hidden">
+        Simpan Tautan
+       </button>
+       
+       <button id="open-video" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-blue-300 btn-hover hidden">
+        Buka Video Eksternal
+       </button>
+       
+       <div id="video-player-container" class="w-full max-w-lg mx-auto bg-gray-100 rounded-xl shadow-lg p-2">
+        <h3 id="video-title-display" class="text-lg font-semibold text-gray-800 mb-2 text-center"></h3>
+        <video id="main-video-player" controls class="w-full rounded-lg hidden">
+         <source id="main-video-source" src="" type="video/mp4">
+         Maaf, peramban Anda tidak mendukung elemen video.
+        </video>
+        <p id="video-not-available" class="text-center text-gray-500 py-4">Video belum tersedia untuk Bab ini.</p>
+       </div>
+      </div>
+      <div id="exercise-content" class="hidden space-y-6">
+       <div id="exercise-url-input" class="space-y-2">
+        <label for="exercise-url" class="block text-sm font-medium text-gray-700">Tautan Wordwall:</label>
+        <input type="url" id="exercise-url" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="Masukkan tautan Wordwall di sini...">
+       </div>
+       <button id="save-exercise-url" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+        Simpan Tautan
+       </button>
+       <button id="open-exercise" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-blue-300 btn-hover">
+        Buka Latihan Soal
+       </button>
+      </div>
+      <div id="image-content" class="hidden space-y-6">
+       <div class="flex items-center space-x-3 mb-4">
+        <span id="image-content-icon" class="text-4xl">📚</span>
+        <h3 id="image-content-title" class="text-xl font-semibold text-gray-700">Kosa Kata</h3>
+       </div>
+       <div class="space-y-2">
+        <label for="image-upload" class="block text-sm font-medium text-gray-700">Unggah Gambar (Maks. 5MB):</label>
+        <input type="file" id="image-upload" accept="image/*" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+       </div>
+       <div class="space-y-2">
+        <label for="content-title-input" class="block text-sm font-medium text-gray-700">Judul Konten:</label>
+        <input type="text" id="content-title-input" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="Masukkan judul...">
+       </div>
+       <div class="space-y-2">
+        <label for="content-description" class="block text-sm font-medium text-gray-700">Deskripsi:</label>
+        <textarea id="content-description" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="Masukkan deskripsi atau penjelasan..."></textarea>
+       </div>
+       <button id="save-image-content" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+        Simpan Konten
+       </button>
+       <div id="saved-content-list" class="space-y-4">
+        </div>
+      </div>
+     </div>
+    </main>
+   </div>
+  </div>
+  <script>
+    // Definisikan data konten statis secara permanen di sini
+    const STATIC_CONTENT = {
+        "chapter_1": {
+            // DITAMBAHKAN: local_video_path sebagai jalur ke file video lokal (ganti sesuai lokasi file Anda)
+            "video-hiwar": { title: "Video Hiwar Bab 1", video_url: "https://drive.google.com/file/d/1qyAOZovMrSRb6VEMuKEeEEFeEmKBFl0M/view?usp=drive_link", local_video_path: "video/bab_1/hiwar1.mp4" },
+            "video-materi": { title: "Video Materi Bab 1", video_url: "https://drive.google.com/file/d/1ttssGDhJBRPINEgAKvlosBrzIk9sd4tL/view?usp=drive_link", local_video_path: "video/bab_1/vid1.mp4" },
+            "exercise": { title: "Latihan Soal Bab 1", exercise_url: "https://wordwall.net/resource/99369249" },
+            // PATH GAMBAR SUDAH DIKOREKSI BERDASARKAN LOKASI FOLDER ANDA
+            "kosa-kata": { 
+                title: "Kosa Kata Bab 1", 
+                image_data: "video/gambar/bab_1/kosa_kata_bab_1.png", 
+                content: "Penjelasan Kosa Kata Bab 1." 
+            }, 
+            "kaidah": { 
+                title: "Kaidah Bab 1", 
+                image_data: "video/gambar/bab_1/kaidah_1.png", 
+                content: "Penjelasan Kaidah Tata Bahasa Bab 1." 
+            },
+        },
+        "chapter_2": {
+            "video-hiwar": { title: "Video Hiwar Bab 2", video_url: "https://drive.google.com/file/d/1kVOrB2rIKKwCYeLAu2J2AEeEoYKhkmIZ/view?usp=drive_link", local_video_path: "video/bab_2/hiwar2.mp4" },
+            "video-materi": { title: "Video Materi Bab 2", video_url: "https://drive.google.com/file/d/1V-zl17OkOoyEggDO_WA0sV4nbEx3y2o_/view?usp=drive_link", local_video_path: "video/bab_2/vid2.mp4" },
+            "exercise": { exercise_url: "https://wordwall.net/resource/99368499" },
+            "kosa-kata": { title: "Kosa Kata Bab 2", image_data: "video/gambar/bab_2/Mufradat_2.jpg", content: "Kosa kata Bab 2." }, 
+            "kaidah": { title: "Kaidah Bab 2", image_data: "video/gambar/bab_2/kaidahhh2.jpg", content: "Kaidah Bab 2." }, 
+        },
+        "chapter_3": { 
+             "video-hiwar": { video_url: "https://drive.google.com/file/d/15GCJ7FEKnTK3uJliOxWH8f3oVLTFExbm/view?usp=drive_link", local_video_path: "video/bab_3/hiwar3.mp4" },
+             "video-materi": { video_url: "https://drive.google.com/file/d/1KgbNBj42g7ziRbbPO7ngkmvC8Ce2cEla/view?usp=drive_link", local_video_path: "video/bab_3/vid3.mp4" },
+             "exercise": { exercise_url: "https://wordwall.net/resource/99810268" },
+             "kosa-kata": { title: "Kosa Kata Bab 3", image_data: "video/gambar/bab_3/mufradat_3.jpg", content: "Kosa kata Bab 3." },
+             "kaidah": { title: "Kaidah Bab 3", image_data: "video/gambar/bab_3/kaidah_3.png", content: "Kaidah Bab 3." },
+        },
+        "chapter_4": { 
+             "video-hiwar": { video_url: "https://drive.google.com/file/d/1C2j4BFu-b6I9CIP37G-FSHiLKRsDn7zF/view?usp=drive_link", local_video_path: "video/bab_4/hiwar4.mp4" },
+             "video-materi": { video_url: "https://drive.google.com/file/d/1O8lh76RJ3UQQhnxZM0_tLprFw39sIe-l/view?usp=drive_link", local_video_path: "video/bab_4/vid4.mp4" },
+             "exercise": { exercise_url: "https://wordwall.net/resource/99811167" },
+             "kosa-kata": { title: "Kosa Kata Bab 4", image_data: "video/gambar/bab_4/mufrodat_4.jpg", content: "Kosa kata Bab 4." },
+             "kaidah": { title: "Kaidah Bab 4", image_data: "video/gambar/bab_4/kaidah4.jpg", content: "Kaidah Kaidah Bab 4." },
+        },
+        "chapter_5": { 
+             "video-hiwar": { video_url: "https://drive.google.com/file/d/1X-r5rI5P4FGmOpK_UKufglLDkEOrCn0O/view?usp=drive_link", local_video_path: "video/bab_5/hiwar5.mp4" },
+             "video-materi": { video_url: "https://drive.google.com/file/d/12X1zymjoBJ8GP49y4X_kAb5lxR6LdSMs/view?usp=drive_link", local_video_path: "video/bab_5/vid5.mp4" },
+             "exercise": { exercise_url: "https://wayground.com/join?gc=10090602" },
+             "kosa-kata": { title: "Kosa Kata Bab 5", image_data: "video/gambar/bab_5/mufradat_5.jpg", content: "Kosa kata Bab 5." },
+             "kaidah": { title: "Kaidah Bab 5", image_data: "video/gambar/bab_5/kaidah_5.png", content: "Kaidah Bab 5." },
+        },
+        "chapter_6": { 
+             "video-hiwar": { video_url: "https://drive.google.com/file/d/1ZnmWNgQ3_3yB8lU6GRnETCJvqNILzwHd/view?usp=drive_link", local_video_path: "video/bab_6/hiwar6.mp4" },
+             "video-materi": { video_url: "https://drive.google.com/file/d/1ROvl6HU8yTd9sBizUFNigNbLduPVzTyU/view?usp=drive_link", local_video_path: "video/bab_6/vid6.mp4" },
+             "exercise": { exercise_url: "https://wayground.com/join?gc=28047466" },
+             "kosa-kata": { title: "Kosa Kata Bab 6", image_data: "video/gambar/bab_6/mufradat_6.jpg", content: "Kosa kata Bab 6." },
+             "kaidah": { title: "Kaidah Bab 6", image_data: "video/gambar/bab_6/kaidah6.jpg", content: "Kaidah Bab 6." },
+        },
+        "evaluation_1": {
+            form_url: "https://docs.google.com/forms/d/e/1FAIpQLScf6tWJgdZRRpZcmzphq_eLydybRee7zlA8QCzYIXX_sg55Ow/viewform?usp=dialog"
+        },
+        "evaluation_2": {
+            form_url: "https://docs.google.com/forms/d/e/1FAIpQLSc2EgnXjcVl1RZO8eOIg4H5JwMpVMN1YADiZva_c198iTs1xg/viewform?usp=publish-editor"
+        }
+    };
+    
+    // Global state
+    let currentPage = 'home';
+    let currentChapter = 1;
+    let currentEvaluation = 1;
+    let currentContentType = '';
+
+    // Inisialisasi sederhana (menghapus dependensi SDK)
+    function initializeApp() {
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('main-content').classList.remove('hidden');
+        // Kosongkan dan sembunyikan semua input/tombol simpan yang tidak digunakan lagi
+        hideConfigInputs();
+        updateImageContent(); 
+    }
+    
+    // Fungsi untuk menyembunyikan input konfigurasi yang tidak digunakan lagi
+    function hideConfigInputs() {
+        // Halaman Evaluasi
+        const evalUrlInput = document.getElementById('evaluation-url');
+        if (evalUrlInput) evalUrlInput.closest('div').classList.add('hidden');
+        const saveEvalBtn = document.getElementById('save-evaluation-url');
+        if (saveEvalBtn) saveEvalBtn.classList.add('hidden');
+        const openEvalBtn = document.getElementById('open-evaluation');
+        if (openEvalBtn) openEvalBtn.classList.remove('hidden');
+        
+        // Halaman Video - Input konfigurasi URL disembunyikan
+        const videoUrlInput = document.getElementById('video-url-input');
+        if (videoUrlInput) videoUrlInput.closest('div').classList.add('hidden');
+        const saveVideoBtn = document.getElementById('save-video-url');
+        if (saveVideoBtn) saveVideoBtn.classList.add('hidden');
+        // Tombol open-video tidak disembunyikan di sini, akan diatur di showContentPage
+        const openVideoBtn = document.getElementById('open-video');
+        if (openVideoBtn) openVideoBtn.classList.add('hidden'); // Sembunyikan default
+        
+        // Halaman Latihan Soal
+        const exerciseUrlInput = document.getElementById('exercise-url-input');
+        if (exerciseUrlInput) exerciseUrlInput.closest('div').classList.add('hidden');
+        const saveExerciseBtn = document.getElementById('save-exercise-url');
+        if (saveExerciseBtn) saveExerciseBtn.classList.add('hidden');
+        const openExerciseBtn = document.getElementById('open-exercise');
+        if (openExerciseBtn) openExerciseBtn.classList.remove('hidden');
+
+        // Halaman Gambar (Kosa Kata/Kaidah)
+        const imageUpload = document.getElementById('image-upload');
+        if (imageUpload) imageUpload.closest('div').classList.add('hidden');
+        const contentTitleInput = document.getElementById('content-title-input');
+        if (contentTitleInput) contentTitleInput.closest('div').classList.add('hidden');
+        const contentDescription = document.getElementById('content-description');
+        if (contentDescription) contentDescription.closest('div').classList.add('hidden');
+        const saveImageContent = document.getElementById('save-image-content');
+        if (saveImageContent) saveImageContent.classList.add('hidden');
+    }
+
+    // Navigation functions
+    function showPage(pageId) {
+        const pages = ['home-page', 'dashboard-page', 'chapter-page', 'evaluation-page', 'content-page'];
+        pages.forEach(page => {
+            document.getElementById(page).classList.add('hidden');
+        });
+        document.getElementById(pageId).classList.remove('hidden');
+        
+        const backBtn = document.getElementById('back-btn');
+        if (pageId === 'home-page') {
+            backBtn.classList.add('hidden');
+        } else {
+            backBtn.classList.remove('hidden');
+        }
+    }
+
+    function goBack() {
+        if (currentPage === 'content') {
+            currentPage = 'chapter';
+            showPage('chapter-page');
+        } else if (currentPage === 'chapter' || currentPage === 'evaluation') {
+            currentPage = 'dashboard';
+            showPage('dashboard-page');
+        } else if (currentPage === 'dashboard') {
+            currentPage = 'home';
+            showPage('home-page');
+        }
+    }
+    
+    // Fungsi baru untuk mendapatkan konten statis
+    function getStaticContent(type, chapterOrEval) {
+        let key = type === 'evaluation' ? `evaluation_${chapterOrEval}` : `chapter_${chapterOrEval}`;
+        
+        const chapterData = STATIC_CONTENT[key];
+        if (!chapterData) return null;
+        
+        if (type === 'evaluation') {
+             return chapterData;
+        } else {
+            return chapterData;
+        }
+    }
+
+    // Fungsi untuk memperbarui tampilan konten gambar (Kosa Kata/Kaidah)
+    function updateImageContent() {
+        const contentList = document.getElementById('saved-content-list');
+        if (!contentList) return;
+        
+        contentList.innerHTML = '';
+        
+        if (currentContentType === 'kosa-kata' || currentContentType === 'kaidah') {
+            const chapterData = getStaticContent('chapter', currentChapter);
+            const content = chapterData ? chapterData[currentContentType] : null;
+            
+            if (content) {
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'bg-gray-50 rounded-lg p-4';
+                contentDiv.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="font-semibold text-gray-800">${content.title || 'Konten Tanpa Judul'}</h4>
+                    </div>
+                    ${content.image_data ? `<img src="${content.image_data}" alt="${content.title || ''}" class="w-full max-w-md mx-auto rounded-lg mb-2">` : ''}
+                    <p class="text-gray-600 text-sm">${content.content || 'Deskripsi tidak tersedia.'}</p>
+                `;
+                contentList.appendChild(contentDiv);
+            } else {
+                 contentList.innerHTML = `<p class="text-center text-gray-500">Konten belum tersedia untuk Bab ini. Harap tambahkan data di STATIC_CONTENT.</p>`;
+            }
+        }
+    }
+
+    function showMessage(message, type) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `fixed top-4 right-4 px-6 py-3 rounded-lg text-white z-50 ${
+            type === 'success' ? 'bg-green-600' : 'bg-red-600'
+        }`;
+        messageDiv.textContent = message;
+        document.body.appendChild(messageDiv);
+        
+        setTimeout(() => {
+            messageDiv.remove();
+        }, 3000);
+    }
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+        initializeApp();
+
+        // Home page navigation
+        document.getElementById('start-learning').addEventListener('click', () => {
+            currentPage = 'dashboard';
+            showPage('dashboard-page');
+        });
+
+        document.getElementById('exit-app').addEventListener('click', () => {
+            showMessage("Terima kasih telah menggunakan aplikasi pembelajaran!", "success");
+        });
+
+        // Back button
+        document.getElementById('back-btn').addEventListener('click', goBack);
+
+        // Chapter buttons
+        document.querySelectorAll('.chapter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentChapter = parseInt(btn.dataset.chapter);
+                currentPage = 'chapter';
+                document.getElementById('chapter-title').textContent = `Bab ${currentChapter}`;
+                showPage('chapter-page');
+            });
+        });
+
+        // Evaluation buttons
+        document.querySelectorAll('.evaluation-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentEvaluation = parseInt(btn.dataset.evaluation);
+                currentPage = 'evaluation';
+                document.getElementById('evaluation-title').textContent = `Evaluasi ${currentEvaluation}`;
+                showPage('evaluation-page');
+                
+                // Pastikan tombol buka evaluasi aktif
+                const openBtn = document.getElementById('open-evaluation');
+                const content = getStaticContent('evaluation', currentEvaluation);
+                openBtn.disabled = !content?.form_url;
+            });
+        });
+
+        // Chapter menu buttons
+        document.getElementById('video-hiwar-btn').addEventListener('click', () => {
+            currentContentType = 'video-hiwar';
+            currentPage = 'content';
+            document.getElementById('content-title').textContent = `Video Hiwar - Bab ${currentChapter}`;
+            showContentPage('video');
+        });
+
+        document.getElementById('video-materi-btn').addEventListener('click', () => {
+            currentContentType = 'video-materi';
+            currentPage = 'content';
+            document.getElementById('content-title').textContent = `Video Materi - Bab ${currentChapter}`;
+            showContentPage('video');
+        });
+
+        document.getElementById('latihan-soal-btn').addEventListener('click', () => {
+            currentContentType = 'exercise';
+            currentPage = 'content';
+            document.getElementById('content-title').textContent = `Latihan Soal - Bab ${currentChapter}`;
+            showContentPage('exercise');
+        });
+
+        document.getElementById('kosa-kata-btn').addEventListener('click', () => {
+            currentContentType = 'kosa-kata';
+            currentPage = 'content';
+            document.getElementById('content-title').textContent = `Kosa Kata - Bab ${currentChapter}`;
+            document.getElementById('image-content-title').textContent = 'Kosa Kata';
+            document.getElementById('image-content-icon').textContent = '📚';
+            showContentPage('image');
+        });
+
+        document.getElementById('kaidah-btn').addEventListener('click', () => {
+            currentContentType = 'kaidah';
+            currentPage = 'content';
+            document.getElementById('content-title').textContent = `Kaidah - Bab ${currentChapter}`;
+            document.getElementById('image-content-title').textContent = 'Kaidah';
+            document.getElementById('image-content-icon').textContent = '📖';
+            showContentPage('image');
+        });
+
+        // --- Aksi Buka Konten (Open in New Tab) ---
+        
+        // Open Evaluation (Google Form)
+        document.getElementById('open-evaluation').addEventListener('click', () => {
+            const content = getStaticContent('evaluation', currentEvaluation);
+            if (content?.form_url) {
+                window.open(content.form_url, '_blank', 'noopener,noreferrer');
+            } else {
+                 showMessage("Link Evaluasi belum tersedia!", "error");
+            }
+        });
+
+        // Open Video (YouTube/Drive) - Hanya digunakan jika tidak ada video lokal
+        document.getElementById('open-video').addEventListener('click', () => {
+            const chapterData = getStaticContent('chapter', currentChapter);
+            const content = chapterData ? chapterData[currentContentType] : null;
+            if (content?.video_url) {
+                window.open(content.video_url, '_blank', 'noopener,noreferrer');
+            } else {
+                showMessage("Link Video belum tersedia!", "error");
+            }
+        });
+
+        // Open Exercise (Wordwall)
+        document.getElementById('open-exercise').addEventListener('click', () => {
+            const chapterData = getStaticContent('chapter', currentChapter);
+            const content = chapterData ? chapterData['exercise'] : null;
+            if (content?.exercise_url) {
+                window.open(content.exercise_url, '_blank', 'noopener,noreferrer');
+            } else {
+                showMessage("Link Latihan Soal belum tersedia!", "error");
+            }
+        });
+    });
+
+    function showContentPage(type) {
+        showPage('content-page');
+        
+        // Sembunyikan semua tipe konten
+        document.getElementById('video-content').classList.add('hidden');
+        document.getElementById('exercise-content').classList.add('hidden');
+        document.getElementById('image-content').classList.add('hidden');
+        
+        // Tampilkan tipe konten yang dipilih
+        document.getElementById(`${type}-content`).classList.remove('hidden');
+
+        if (type === 'image') {
+            updateImageContent();
+        } else if (type === 'video') {
+             const chapterData = getStaticContent('chapter', currentChapter);
+             const content = chapterData ? chapterData[currentContentType] : null;
+
+             const videoPlayer = document.getElementById('main-video-player');
+             const videoSource = document.getElementById('main-video-source');
+             const videoTitleDisplay = document.getElementById('video-title-display');
+             const videoNotAvailable = document.getElementById('video-not-available');
+             const openVideoBtn = document.getElementById('open-video');
+             
+             // Reset tampilan
+             videoPlayer.classList.add('hidden');
+             videoNotAvailable.classList.remove('hidden');
+             openVideoBtn.classList.add('hidden');
+             videoNotAvailable.textContent = "Video belum tersedia untuk Bab ini.";
+
+             // Prioritaskan video lokal
+             if (content?.local_video_path) {
+                videoTitleDisplay.textContent = content.title || "Video Pembelajaran";
+                videoSource.src = content.local_video_path;
+                videoPlayer.load(); // Memuat video baru
+                videoPlayer.classList.remove('hidden');
+                videoNotAvailable.classList.add('hidden');
+                
+             } else if (content?.video_url) {
+                 // Fallback ke tautan eksternal (Drive/YouTube) jika tidak ada video lokal
+                 videoTitleDisplay.textContent = content.title || "Video Pembelajaran (Tautan Eksternal)";
+                 videoNotAvailable.textContent = "Video tidak tersedia secara lokal. Silakan gunakan tombol di bawah untuk membuka tautan eksternal (Drive/YouTube).";
+                 
+                 // Tampilkan tombol eksternal
+                 openVideoBtn.classList.remove('hidden');
+                 openVideoBtn.disabled = false;
+
+             } else {
+                 // Tidak ada video sama sekali
+                 videoTitleDisplay.textContent = "Video Pembelajaran";
+             }
+
+        } else if (type === 'exercise') {
+             const chapterData = getStaticContent('chapter', currentChapter);
+             const content = chapterData ? chapterData['exercise'] : null;
+             const openBtn = document.getElementById('open-exercise');
+             openBtn.disabled = !content?.exercise_url;
+        }
+    }
+</script>
+ </body>
+</html>
